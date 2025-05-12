@@ -9,8 +9,8 @@ public class VaccinePresenter {
     private static final String TAG = VaccinePresenter.class.getSimpleName();
 
     private final Context context;
-    DBHelper dbHelper;
-    VaccineDAO vaccineDAO;
+    public DBHelper dbHelper;
+    public VaccineDAO vaccineDAO;
 
     public VaccinePresenter(Context context, VaccineDAO vaccineDAO) {
         this.context = context;
@@ -18,7 +18,9 @@ public class VaccinePresenter {
     }
 
     public void createVaccine(Vaccine vaccine){
-        dbHelper = new DBHelper(context);
+        if (dbHelper == null) {
+            dbHelper = new DBHelper(context);
+        }
 
         if (dbHelper.insertVaccine(vaccine) > 0)
             vaccineDAO.createSuccess();
@@ -26,7 +28,9 @@ public class VaccinePresenter {
     }
 
     public boolean getAllVaccine(){
-        dbHelper = new DBHelper(context);
+        if (dbHelper == null) {
+            dbHelper = new DBHelper(context);
+        }
         return dbHelper.getAllVaccines().size() == 0; //return true if list.size == 0, return false if list.size != 0
     }
 }

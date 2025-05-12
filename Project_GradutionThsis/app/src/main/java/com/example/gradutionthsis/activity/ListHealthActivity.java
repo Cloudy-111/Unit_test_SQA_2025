@@ -93,15 +93,16 @@ public class ListHealthActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //Xử lý sự kiện của nút back trên action bar
-        switch (item.getItemId()) {
-            case android.R.id.home: //Xử lý sự kiện của nút back trên action bar
-                finish();
-                return true;
-            case R.id.iAnalytis:
-                sendObject(relative, GrowthChartActivity.class);
-                return true;
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        } else if (id == R.id.iAnalytis) {
+            sendObject(relative, GrowthChartActivity.class);
+            return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
     // [END onOptionsItemSelected]

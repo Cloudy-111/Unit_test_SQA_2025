@@ -107,16 +107,14 @@ public class TabRelativeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //Xử lý sự kiện của nút back trên action bar
-        switch (item.getItemId()) {
-//            case android.R.id.home: //Xử lý sự kiện của nút back trên action bar
-//                finish();
-//                startActivity(new Intent(this, MainActivity.class));
-//                return true;
-            case R.id.iHealth:
-                sendObject(relative);
-                Log.i(TAG, "onContextItemSelected: Edit of menu context is selected!");
-                return true;
+        int id = item.getItemId();
+
+        if (id == R.id.iHealth) {
+            sendObject(relative);
+            Log.i(TAG, "onContextItemSelected: Edit of menu context is selected!");
+            return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 

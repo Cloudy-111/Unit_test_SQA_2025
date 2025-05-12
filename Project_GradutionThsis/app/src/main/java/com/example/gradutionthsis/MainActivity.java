@@ -91,36 +91,33 @@ public class MainActivity extends AppCompatActivity {
         @SuppressLint("NonConstantResourceId")
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                //Xử lý sự kiện item home trên thanh bottom navigation
-                case R.id.navigation_home:
-                    toolbar.setTitle(getResources().getText(R.string.regulation));
-                    loadFragment(new RegulationFragment());   //load fragment home
-                    menuItem.setVisible(false);
-                    Log.i(TAG, "onNavigationItemSelected: Clicked item Home in navigation");
-                    break;
-                //Xử lý sự kiện item profile trên thanh bottom navigation
-                case R.id.navigation_profile:
-                    toolbar.setTitle(getResources().getText(R.string.immunization_book));
-                    loadFragment(new ProfileFragment());   //load fragment home
-                    menuItem.setVisible(true);
-                    Log.i(TAG, "onNavigationItemSelected: Clicked item Profile in navigation");
-                    break;
-                //Xử lý sự kiện item vaccine trên thanh bottom navigation
-                case R.id.navigation_vaccine:
-                    toolbar.setTitle(getResources().getText(R.string.vaccine));
-                    loadFragment(new VaccineFragment());   //load fragment Vaccine
-                    menuItem.setVisible(false);
-                    Log.i(TAG, "onNavigationItemSelected: Clicked item Vaccine in navigation");
-                    break;
-                //Xử lý sự kiện item schedule trên thanh bottom navigation
-                case R.id.navigation_schedule:
-                    toolbar.setTitle(getResources().getText(R.string.settings));
-                    menuItem.setVisible(false);
-                    loadFragment(new SettingFragment());   //load fragment Settings
-                    Log.i(TAG, "onNavigationItemSelected: Clicked item Schedule in navigation");
-                    break;
+            int id = item.getItemId();
+
+            if (id == R.id.navigation_home) {
+                toolbar.setTitle(getResources().getText(R.string.regulation));
+                loadFragment(new RegulationFragment());
+                menuItem.setVisible(false);
+                Log.i(TAG, "onNavigationItemSelected: Clicked item Home in navigation");
+
+            } else if (id == R.id.navigation_profile) {
+                toolbar.setTitle(getResources().getText(R.string.immunization_book));
+                loadFragment(new ProfileFragment());
+                menuItem.setVisible(true);
+                Log.i(TAG, "onNavigationItemSelected: Clicked item Profile in navigation");
+
+            } else if (id == R.id.navigation_vaccine) {
+                toolbar.setTitle(getResources().getText(R.string.vaccine));
+                loadFragment(new VaccineFragment());
+                menuItem.setVisible(false);
+                Log.i(TAG, "onNavigationItemSelected: Clicked item Vaccine in navigation");
+
+            } else if (id == R.id.navigation_schedule) {
+                toolbar.setTitle(getResources().getText(R.string.settings));
+                menuItem.setVisible(false);
+                loadFragment(new SettingFragment());
+                Log.i(TAG, "onNavigationItemSelected: Clicked item Schedule in navigation");
             }
+
             return true;
         }
     };

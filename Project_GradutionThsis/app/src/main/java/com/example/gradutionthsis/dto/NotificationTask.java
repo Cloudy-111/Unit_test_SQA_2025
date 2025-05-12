@@ -55,6 +55,8 @@ public class NotificationTask implements Serializable {
         this.minute = minute;
     }
 
+    public NotificationTask(){}
+
     public NotificationTask(int idNotify, int status, int day, int hour, int minute) {
         this.idNotify = idNotify;
         this.status = status;

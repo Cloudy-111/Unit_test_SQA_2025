@@ -10,8 +10,8 @@ import java.util.List;
 public class RelativePresenter {
     private final Context context;
 
-    DBHelper dbHelper;
-    RelativeDAO relativeDAO;
+    public DBHelper dbHelper;
+    public RelativeDAO relativeDAO;
 
     public RelativePresenter(Context context, RelativeDAO relativeDAO) {
         this.context = context;
@@ -19,7 +19,9 @@ public class RelativePresenter {
     }
 
     public void create(Relative relative) {
-        dbHelper = new DBHelper(context);
+        if (dbHelper == null) {
+            dbHelper = new DBHelper(context);
+        }
 
         if (dbHelper.insertRelative(relative) > 0)
             relativeDAO.createSuccess();
@@ -27,7 +29,9 @@ public class RelativePresenter {
     }
 
     public void update(Relative relative) {
-        dbHelper = new DBHelper(context);
+        if (dbHelper == null) {
+            dbHelper = new DBHelper(context);
+        }
 
         if (dbHelper.updateRelative(relative) > 0)
             relativeDAO.updateSuccess();
@@ -35,7 +39,9 @@ public class RelativePresenter {
     }
 
     public void delete(int id) {
-        dbHelper = new DBHelper(context);
+        if (dbHelper == null) {
+            dbHelper = new DBHelper(context);
+        }
 
         if (dbHelper.deleteRelative(id))
             relativeDAO.deleteSuccess();
