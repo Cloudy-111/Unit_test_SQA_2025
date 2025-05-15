@@ -18,7 +18,7 @@ public class AlarmReceiverTest {
     public void setUp() {
         alarmReceiver = new AlarmReceiver();  // Khởi tạo đối tượng AlarmReceiver
     }
-    //TC25
+    //TC_298_25
     @Test
     public void testValidDate() {
         String validDate = "2021-03-25";  // Ngày hợp lệ theo định dạng yyyy-MM-dd
@@ -26,7 +26,7 @@ public class AlarmReceiverTest {
         // Kiểm tra rằng phương thức trả về false với ngày hợp lệ
         assertFalse("Expected date to be valid", alarmReceiver.isDateInvalid(validDate, format));
     }
-    //TC26
+    //TC_298_26
     @Test
     public void testInvalidDate() {
         String invalidDate = "2021-02-31";  // Ngày không hợp lệ vì tháng 2 không có 31 ngày
@@ -35,7 +35,7 @@ public class AlarmReceiverTest {
         boolean result = alarmReceiver.isDateInvalid(invalidDate, format);
         assertTrue("Expected date to be invalid", result);
     }
-    //TC27
+    //TC_298_27
     @Test
     public void testInvalidMonth() {
         String invalidMonthDate1 = "2021-13-25";  // Tháng 13 không tồn tại
@@ -48,7 +48,7 @@ public class AlarmReceiverTest {
         // Kiểm tra tháng 0 là không hợp lệ
         assertTrue("Expected month 0 to be invalid", alarmReceiver.isDateInvalid(invalidMonthDate2, format));
     }
-    //TC28
+    //TC_298_28
     @Test
     public void testEmptyDate() {
         String emptyDate = "";  // Chuỗi ngày rỗng
@@ -57,7 +57,7 @@ public class AlarmReceiverTest {
         boolean result = alarmReceiver.isDateInvalid(emptyDate, format);
         assertTrue("Expected empty date to be invalid", result);
     }
-    //TC29
+    //TC_298_29
     @Test
     public void testInvalidDateFormat() {
         String wrongFormatDate = "25-03-2021";  // Định dạng không đúng (dd-MM-yyyy)
@@ -66,7 +66,7 @@ public class AlarmReceiverTest {
         boolean result = alarmReceiver.isDateInvalid(wrongFormatDate, format);
         assertTrue("Expected incorrect date format to be invalid", result);
     }
-    //TC30
+    //TC_298_30
     // Kiểm tra xem ParseException có được ném ra khi parse ngày không hợp lệ không
     @Test(expected = ParseException.class)
     public void testParseExceptionThrownForInvalidDate() throws ParseException {
@@ -78,7 +78,7 @@ public class AlarmReceiverTest {
         df.setLenient(false);  // Không cho phép lenient (tự sửa ngày sai)
         df.parse(invalidDate);  // Phải ném ra ParseException
     }
-    //TC31
+    //TC_298_31
     @Test
     public void testGetNotificationId() {
         AlarmReceiver alarmReceiver = new AlarmReceiver();
