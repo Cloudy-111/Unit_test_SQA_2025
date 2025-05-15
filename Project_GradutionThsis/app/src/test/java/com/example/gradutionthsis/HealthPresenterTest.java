@@ -38,7 +38,7 @@ public class HealthPresenterTest {
         healthPresenter.dbHelper = mockDBHelper;
         healthPresenter.healthDAO = mockHealthDAO;
     }
-    //TC13
+    //TC_298_13
     // Test khi insertHealth thất bại (trả về -1)
     @Test
     public void testCreateHealth_insertFail() {
@@ -53,7 +53,7 @@ public class HealthPresenterTest {
         // Và createSuccess không được gọi
         verify(mockHealthDAO, never()).createSuccess();
     }
-    //TC14
+    //TC_298_14
     // Test khi trọng lượng < 0 thì createFail được gọi
     @Test
     public void testCreateHealth_InvalidWeight_Fail() {
@@ -66,7 +66,7 @@ public class HealthPresenterTest {
         verify(mockHealthDAO, times(1)).createFail();
         verify(mockHealthDAO, never()).createSuccess();
     }
-    //TC15
+    //TC_298_15
     // Test khi thời gian là null thì cũng bị từ chối
     @Test
     public void testCreateHealth_InvalidTime_Fail() {
@@ -79,7 +79,7 @@ public class HealthPresenterTest {
         verify(mockHealthDAO, times(1)).createFail();
         verify(mockHealthDAO, never()).createSuccess();
     }
-    //TC16
+    //TC_298_16
     // Test khi insert thành công
     @Test
     public void testCreateHealth_insertSuccess() {
@@ -92,7 +92,7 @@ public class HealthPresenterTest {
         verify(mockHealthDAO, times(1)).createSuccess();
         verify(mockHealthDAO, never()).createFail();
     }
-    //TC17
+    //TC_298_17
     // Test khi cập nhật thất bại (trả về -1)
     @Test
     public void testUpdateHealth_updateFail() {
@@ -104,7 +104,7 @@ public class HealthPresenterTest {
         verify(mockHealthDAO, times(1)).updateFail();
         verify(mockHealthDAO, never()).updateSuccess();
     }
-    //TC18
+    //TC_298_18
     // Test khi không tìm thấy bản ghi để update (trả về 0)
     @Test
     public void testUpdateHealth_RecordNotFound_Fail() {
@@ -117,7 +117,7 @@ public class HealthPresenterTest {
         verify(mockHealthDAO, times(1)).updateFail();
         verify(mockHealthDAO, never()).updateSuccess();
     }
-    //TC19
+    //TC_298_19
     // Test khi không có quyền cập nhật (trả về -2)
     @Test
     public void testUpdateHealth_NoPermission_Fail() {
@@ -128,7 +128,7 @@ public class HealthPresenterTest {
         verify(mockHealthDAO, times(1)).updateFail();
         verify(mockHealthDAO, never()).updateSuccess();
     }
-    //TC20
+    //TC_298_20
     // Test khi cập nhật thành công
     @Test
     public void testUpdateHealth_updateSuccess() {
@@ -139,7 +139,7 @@ public class HealthPresenterTest {
         verify(mockHealthDAO, times(1)).updateSuccess();
         verify(mockHealthDAO, never()).updateFail();
     }
-    //TC21
+    //TC_298_21
     // Test khi xóa thất bại (trả về false)
     @Test
     public void testDeleteHealth_deleteFail() {
@@ -150,7 +150,7 @@ public class HealthPresenterTest {
         verify(mockHealthDAO, times(1)).deleteFail();
         verify(mockHealthDAO, never()).deleteSuccess();
     }
-    //TC22
+    //TC_298_22
     // Test khi xóa với ID không tồn tại
     @Test
     public void testDeleteHealth_InvalidId_Fail() {
@@ -161,7 +161,7 @@ public class HealthPresenterTest {
         verify(mockHealthDAO, times(1)).deleteFail();
         verify(mockHealthDAO, never()).deleteSuccess();
     }
-    //TC23
+    //TC_298_23
     // Test khi không có quyền xóa
     @Test
     public void testDeleteHealth_NoPermission_Fail() {
@@ -172,7 +172,7 @@ public class HealthPresenterTest {
         verify(mockHealthDAO, times(1)).deleteFail();
         verify(mockHealthDAO, never()).deleteSuccess();
     }
-    //TC24
+    //TC_298_24
     // Test khi xóa thành công
     @Test
     public void testDeleteHealth_deleteSuccess() {
