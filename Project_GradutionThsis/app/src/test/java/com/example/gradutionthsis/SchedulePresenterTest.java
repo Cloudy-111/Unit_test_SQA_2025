@@ -36,7 +36,7 @@ public class SchedulePresenterTest {
         presenter.setDbHelper(fakeDBHelper);
     }
 
-    // TC39: Kiểm tra tạo lịch tiêm thành công (insertDetailSchedule trả về 1)
+    // TC_562_01: Kiểm tra tạo lịch tiêm thành công (insertDetailSchedule trả về 1)
     @Test
     public void testCreateDetailSchedule_Success() {
         Injection i = new Injection();
@@ -50,7 +50,7 @@ public class SchedulePresenterTest {
         verify(mockDAO, never()).createFail();
     }
 
-    // TC40: Tạo lịch tiêm thất bại do ngày sinh rỗng → calTime trả về null → insert fail
+    // TC_562_02: Tạo lịch tiêm thất bại do ngày sinh rỗng → calTime trả về null → insert fail
     @Test
     public void testCreateDetailSchedule_InsertFail() {
         Injection i = new Injection();
@@ -63,7 +63,7 @@ public class SchedulePresenterTest {
         verify(mockDAO, atLeastOnce()).createFail();
     }
 
-    // TC41: Cập nhật lịch thành công (updateDetailSchedule trả về 1)
+    // TC_562_03: Cập nhật lịch thành công (updateDetailSchedule trả về 1)
     @Test
     public void testUpdateDetailSchedule_Success() {
         DetailSchedule s = new DetailSchedule(1, 1, "01/01/2024", 0, 0);
@@ -74,7 +74,7 @@ public class SchedulePresenterTest {
         verify(mockDAO).updateSuccess();
     }
 
-    // TC42: Cập nhật lịch thất bại do không có bản ghi trùng khớp
+    // TC_562_04: Cập nhật lịch thất bại do không có bản ghi trùng khớp
     @Test
     public void testUpdateDetailSchedule_Fail() {
         DetailSchedule s = new DetailSchedule(99, 99, "01/01/2024", 0, 0);
@@ -84,7 +84,7 @@ public class SchedulePresenterTest {
         verify(mockDAO).updateFail();
     }
 
-    // TC43: Lấy danh sách lịch theo trẻ em có dữ liệu
+    // TC_562_05: Lấy danh sách lịch theo trẻ em có dữ liệu
     @Test
     public void testGetListByIdRelative_WithData() {
         DetailSchedule s = new DetailSchedule(1, 1, "01/01/2024", 0, 0);
@@ -95,7 +95,7 @@ public class SchedulePresenterTest {
         assert result != null && !result.isEmpty();
     }
 
-    // TC44: Lấy danh sách lịch theo trẻ em không có dữ liệu
+    // TC_562_06: Lấy danh sách lịch theo trẻ em không có dữ liệu
     @Test
     public void testGetListByIdRelative_Empty() {
         List<DetailSchedule> result = presenter.getListByIdRelative(999); // không có lịch
@@ -103,7 +103,7 @@ public class SchedulePresenterTest {
         assert result == null;
     }
 
-    // TC45: Lấy chi tiết một lịch tiêm thành công
+    // TC_562_07: Lấy chi tiết một lịch tiêm thành công
     @Test
     public void testGetDetailSchedule_Found() {
         DetailSchedule s = new DetailSchedule(1, 1, "01/01/2024", 0, 0);
@@ -114,7 +114,7 @@ public class SchedulePresenterTest {
         assert result != null;
     }
 
-    // TC46: Lấy chi tiết một lịch tiêm không tồn tại
+    // TC_562_08: Lấy chi tiết một lịch tiêm không tồn tại
     @Test
     public void testGetDetailSchedule_NotFound() {
         DetailSchedule result = presenter.getDetailSchedule(100, 100);
