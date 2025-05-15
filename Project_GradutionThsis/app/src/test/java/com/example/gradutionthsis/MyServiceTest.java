@@ -9,7 +9,7 @@ import java.util.Calendar;
 
 public class MyServiceTest {
 
-    //TC_298_32
+    //TC_298_20
     // Kiểm tra ngày cộng thêm 1 ngày (dayNotify = 1)
     @Test
     public void testGetCurrentDay_AddOneDay() {
@@ -30,7 +30,7 @@ public class MyServiceTest {
         // Đảm bảo ngày trả về đúng với ngày cộng thêm 1
         assertEquals("Ngày phải cộng thêm đúng 1 ngày", expectedDate, result);
     }
-    //TC_298_33
+    //TC_298_21
     // Kiểm tra ngày cộng thêm 30 ngày và tháng có thể thay đổi
     @Test
     public void testGetCurrentDay_NextMonth() {
@@ -52,7 +52,7 @@ public class MyServiceTest {
         // Đảm bảo ngày cộng thêm 30 ngày và tháng có thể thay đổi chính xác
         assertEquals("Ngày cộng thêm đúng 30 ngày và tháng phải thay đổi chính xác", expectedDate, result);
     }
-    //TC_298_34
+    //TC_298_22
     // Kiểm tra ngày cộng thêm 365 ngày và năm phải thay đổi chính xác
     @Test
     public void testGetCurrentDay_NextYear() {
@@ -74,7 +74,7 @@ public class MyServiceTest {
         // Đảm bảo ngày cộng thêm đúng 365 ngày và năm phải thay đổi chính xác
         assertEquals("Ngày cộng thêm đúng 365 ngày và năm phải thay đổi chính xác", expectedDate, result);
     }
-    //TC_298_35
+    //TC_298_23
     // Kiểm tra ngày rỗng
     @Test
     public void testSetFormat_EmptyDate() {
@@ -90,7 +90,7 @@ public class MyServiceTest {
         // Đảm bảo rằng kết quả là chuỗi rỗng
         assertEquals("Ngày rỗng phải trả về chuỗi rỗng", expectedDate, result);
     }
-    //TC_298_36
+    //TC_298_24
     // Kiểm tra ngày có định dạng không hợp lệ
     @Test
     public void testSetFormat_InvalidDateFormat() {
@@ -106,7 +106,7 @@ public class MyServiceTest {
         // Đảm bảo rằng phương thức chuyển đúng ngày
         assertEquals("Ngày có định dạng sai phải chuyển đổi đúng", expectedDate, result);
     }
-    //TC_298_37
+    //TC_298_25
     // Kiểm tra ngày hợp lệ
     @Test
     public void testSetFormat_ValidDate() {
@@ -122,7 +122,7 @@ public class MyServiceTest {
         // Đảm bảo rằng ngày được chuyển đổi đúng
         assertEquals("Ngày hợp lệ phải chuyển đổi đúng định dạng", expectedDate, result);
     }
-    //TC_298_38
+    //TC_298_26
     // Kiểm tra ngày cộng thêm 30 ngày và tháng có thể thay đổi chính xác
     @Test
     public void testGetCurrentDay_NextMonth_Uqpdated() {
