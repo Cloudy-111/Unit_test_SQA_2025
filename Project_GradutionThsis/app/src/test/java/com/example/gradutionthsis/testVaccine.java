@@ -49,7 +49,7 @@ public class testVaccine {
         vaccinePresenter.vaccineDAO = mockVaccineDAO;
     }
 
-    @Test//TC01
+    @Test//TC_226_01
     // Test case kiểm tra xem tạo vaccine lỗi
     public void testCreateVaccine_insertFail() {
         // Đặt DB trả về -1 khi insert
@@ -65,7 +65,7 @@ public class testVaccine {
         verify(mockVaccineDAO, never()).createSuccess();
     }
 
-    @Test//TC02
+    @Test//TC_226_02
     // Test case kiểm tra xem tạo vaccine thành công
     public void testCreateVaccine_insertSuccess() {
         // Đặt DB trả về 1 khi insert
@@ -81,7 +81,7 @@ public class testVaccine {
         verify(mockVaccineDAO, never()).createFail();
     }
 
-    @Test//TC03
+    @Test//TC_226_03
     // Test case kiểm tra lấy danh sách vaccine khi danh sách rỗng
     public void testGetAllVaccine_emptyList(){
         // Đặt DB trả về danh sách rỗng
@@ -94,7 +94,7 @@ public class testVaccine {
         assertTrue(result);
     }
 
-    @Test//TC04
+    @Test//TC_226_04
     // Test case kiểm tra khi danh sách vaccine trả về có phần tử
     public void testGetAllVaccine_nonEmptyList() {
         // Tạo danh sách giả gồm 2 phần tử Vaccine
@@ -109,4 +109,47 @@ public class testVaccine {
         // Nếu danh sách mà không rỗng, trả về false
         assertFalse(result);
     }
+
+    @Test //TC_226_05
+    public void testCreateVaccine_emptyName() {
+        Vaccine vaccine = new Vaccine();
+        vaccine.setNameVaccine("");  // Trống
+        vaccine.setVaccination("Mũi 1");
+        vaccine.setDisease("Cúm");
+
+        when(mockDBHelper.insertVaccine(any(Vaccine.class))).thenReturn(1);
+
+        vaccinePresenter.createVaccine(vaccine);
+
+        verify(mockVaccineDAO).createSuccess(); // => Đây là **lỗi** nếu không có kiểm tra đầu vào
+    }
+
+    @Test//TC_226_06
+    public void testCreateVaccine_emptyVaccination() {
+        Vaccine vaccine = new Vaccine();
+        vaccine.setNameVaccine("Covid-19");
+        vaccine.setVaccination("");  // Trống
+        vaccine.setDisease("Covid");
+
+        when(mockDBHelper.insertVaccine(any(Vaccine.class))).thenReturn(1);
+
+        vaccinePresenter.createVaccine(vaccine);
+
+        verify(mockVaccineDAO).createSuccess(); // => **Lỗi nếu không kiểm tra**
+    }
+
+    @Test//TC_226_07
+    public void testCreateVaccine_emptyDisease() {
+        Vaccine vaccine = new Vaccine();
+        vaccine.setNameVaccine("Covid-19");
+        vaccine.setVaccination("Mũi 1");
+        vaccine.setDisease("");  // Trống
+
+        when(mockDBHelper.insertVaccine(any(Vaccine.class))).thenReturn(1);
+
+        vaccinePresenter.createVaccine(vaccine);
+
+        verify(mockVaccineDAO).createSuccess(); // => **Lỗi nếu thiếu validate**
+    }
+
 }

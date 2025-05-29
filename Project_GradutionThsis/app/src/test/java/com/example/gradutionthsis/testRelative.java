@@ -42,7 +42,7 @@ public class testRelative {
         relativePresenter.relativeDAO = mockRelativeDAO;
     }
 
-    @Test//TC05
+    @Test//TC_226_08
     // Test trường hợp tạo Relative thành công
     public void test_create_relative_success(){
         // Đặt DB trả về ID
@@ -55,7 +55,7 @@ public class testRelative {
         verify(mockRelativeDAO, never()).createFail();
     }
 
-    @Test//TC06
+    @Test//TC_226_09
     // Test trường hợp tạo Relative thất bại
     public void test_create_relative_failed(){
         // Đặt DB trả về 0 (thất bại)
@@ -69,7 +69,7 @@ public class testRelative {
     }
 
 
-    @Test//TC07
+    @Test//TC_226_10
     // Test cập nhật thông tin Relative thành công
     public void test_update_relative_success(){
         // Đặt cập nhật thành công
@@ -82,7 +82,7 @@ public class testRelative {
         verify(mockRelativeDAO, never()).updateFail();
     }
 
-    @Test//TC08
+    @Test//TC_226_11
     // Test cập nhật thông tin Relative thất bại
     public void test_update_relative_failed(){
         // Đặt cập nhật thất bại
@@ -95,7 +95,7 @@ public class testRelative {
         verify(mockRelativeDAO, never()).updateSuccess();
     }
 
-    @Test//TC09
+    @Test//TC_226_12
     // Test xoá Relative thành công
     public void test_delete_relative_success(){
         // Xoá thành công
@@ -108,7 +108,7 @@ public class testRelative {
         verify(mockRelativeDAO, never()).deleteFail();
     }
 
-    @Test//TC10
+    @Test//TC_226_13
     // Test xoá Relative thất bại
     public void test_delete_relative_failed(){
         // Xoá thất bại
@@ -121,7 +121,7 @@ public class testRelative {
         verify(mockRelativeDAO, never()).deleteSuccess();
     }
 
-    @Test//TC11
+    @Test//TC_226_14
     // Test lấy Relative cuối cùng khi danh sách có phần tử
     public void test_getFinalRelative_success(){
         List<Relative> fakeList = new ArrayList<>();
@@ -137,7 +137,7 @@ public class testRelative {
         assertEquals("last_name", result.getFullName());
     }
 
-    @Test//TC12
+    @Test//TC_226_15
     // Test lấy Relative cuối cùng khi không có dữ liệu
     public void test_getFinalRelative_failed(){
         // Danh sách rỗng
@@ -148,4 +148,57 @@ public class testRelative {
 
         assertNull(result); // Kết quả phải là null
     }
+
+    @Test//TC_226_16
+    public void test_create_relative_with_future_birthdate() {
+        Relative relative = new Relative("Name", "Nick", "Male", "2099-01-01");
+        when(mockDBHelper.insertRelative(any(Relative.class))).thenReturn(1);
+
+        relativePresenter.create(relative);
+
+        verify(mockRelativeDAO).createSuccess(); // => Lỗi vì dữ liệu sai nhưng vẫn chấp nhận
+    }
+
+
+    @Test//TC_226_17
+    public void test_create_relative_with_empty_fullname() {
+        Relative relative = new Relative("", "Nick", "Male", "2010-01-01");
+        when(mockDBHelper.insertRelative(any(Relative.class))).thenReturn(1);
+
+        relativePresenter.create(relative);
+
+        verify(mockRelativeDAO).createSuccess(); // => Lỗi
+    }
+
+    @Test//TC_226_18
+    public void test_create_relative_with_empty_nickname() {
+        Relative relative = new Relative("Name", "", "Male", "2010-01-01");
+        when(mockDBHelper.insertRelative(any(Relative.class))).thenReturn(1);
+
+        relativePresenter.create(relative);
+
+        verify(mockRelativeDAO).createSuccess(); // Nếu nickname bắt buộc → đây là lỗi
+    }
+
+    @Test//TC_226_19
+    public void test_create_relative_with_empty_gender() {
+        Relative relative = new Relative("Name", "Nick", "", "2010-01-01");
+        when(mockDBHelper.insertRelative(any(Relative.class))).thenReturn(1);
+
+        relativePresenter.create(relative);
+
+        verify(mockRelativeDAO).createSuccess(); // => Lỗi nếu không kiểm tra gender
+    }
+
+    @Test//TC_226_20
+    public void test_create_relative_with_empty_birthdate() {
+        Relative relative = new Relative("Name", "Nick", "Male", "");
+        when(mockDBHelper.insertRelative(any(Relative.class))).thenReturn(1);
+
+        relativePresenter.create(relative);
+
+        verify(mockRelativeDAO).createSuccess(); // => Lỗi vì thiếu ngày sinh
+    }
+
+
 }
